@@ -44,10 +44,10 @@ export const TweetCard = ({ tweet }) => {
         shadow={"cardShadow"}
       >
         <Box position={"absolute"} left={"20px"} top={"20px"}>
-          <Image src="/src/assets/logo.svg" alt="logo" />
+          <Image src="/public/assets/logo.svg" alt="logo" />
         </Box>
         <Box position={"absolute"} left={"36px"} top={"28px"}>
-          <Image src="../../assets/picture.svg" alt="background" />
+          <Image src="/public/assets/picture.svg" alt="background" />
         </Box>
         <Box
           position={"absolute"}
