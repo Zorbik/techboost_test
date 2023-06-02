@@ -11,8 +11,8 @@ export const userApi = createApi({
 
   endpoints: (build) => ({
     getUsers: build.query({
-      query: () => ({
-        url: "",
+      query: (query) => ({
+        url: query ? `?p=${query.p}&l=${query.l}` : "",
         method: "GET",
       }),
 

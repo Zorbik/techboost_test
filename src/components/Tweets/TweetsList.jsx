@@ -1,10 +1,12 @@
-import { Box, Spinner } from "@chakra-ui/react";
+import { Box, Button, Spinner } from "@chakra-ui/react";
 import { useGetUsersQuery } from "../../redux/users/userApi";
 import { TweetCard } from "./TweetCard";
 import { useSelector } from "react-redux";
+import { useState } from "react";
 
 export const TweetsList = () => {
-  const { data, isLoading } = useGetUsersQuery();
+  const [query, setQuery] = useState({ p: 1, l: 3 });
+  const { data, isLoading } = useGetUsersQuery(query);
   const filter = useSelector((state) => state.following.filter);
   const followingCards = useSelector((state) => state.following.items);
 
@@ -44,6 +46,11 @@ export const TweetsList = () => {
         {data &&
           shownData.map((item) => <TweetCard key={item.id} tweet={item} />)}
       </Box>
+      {query && (
+        <Button onClick={() => setQuery()} variant={"followingBtn"}>
+          Load more...
+        </Button>
+      )}
     </>
   );
 };
