@@ -5,8 +5,10 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 
 export const TweetsList = () => {
-  const [query, setQuery] = useState({ p: 1, l: 3 });
-  const { data, isLoading } = useGetUsersQuery(query);
+  const { data: allData } = useGetUsersQuery();
+  const [query, setQuery] = useState({ p: 1, l: 6 });
+  const { data, isLoading, isFetching } = useGetUsersQuery(query);
+
   const filter = useSelector((state) => state.following.filter);
   const followingCards = useSelector((state) => state.following.items);
 
@@ -43,11 +45,22 @@ export const TweetsList = () => {
         flexWrap={"wrap"}
         justifyContent={"center"}
       >
-        {data &&
-          shownData.map((item) => <TweetCard key={item.id} tweet={item} />)}
+        {shownData?.map((item) => (
+          <TweetCard key={item.id} tweet={item} />
+        ))}
       </Box>
-      {query && (
-        <Button onClick={() => setQuery()} variant={"followingBtn"}>
+      {allData?.length > data?.length && (
+        <Button
+          onClick={() =>
+            setQuery((prevQuery) => ({
+              ...prevQuery,
+              l: prevQuery.l + 6,
+            }))
+          }
+          variant={"followingBtn"}
+          isLoading={isFetching}
+          mb={"20px"}
+        >
           Load more...
         </Button>
       )}
