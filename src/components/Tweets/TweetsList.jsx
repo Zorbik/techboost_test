@@ -2,7 +2,7 @@ import { Box, Button, Spinner } from "@chakra-ui/react";
 import { useGetUsersQuery } from "../../redux/users/userApi";
 import { TweetCard } from "./TweetCard";
 import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 export const TweetsList = () => {
   const { data: allData } = useGetUsersQuery();
@@ -12,18 +12,16 @@ export const TweetsList = () => {
   const filter = useSelector((state) => state.following.filter);
   const followingCards = useSelector((state) => state.following.items);
 
-  const shouldShow = (data) => {
+  const shownData = useMemo(() => {
     switch (filter) {
       case "follow":
-        return data.filter((item) => !followingCards.includes(item.id));
+        return data?.filter((item) => !followingCards?.includes(item.id));
       case "followings":
-        return data.filter((item) => followingCards.includes(item.id));
+        return data?.filter((item) => followingCards?.includes(item.id));
       default:
         return data;
     }
-  };
-
-  const shownData = shouldShow(data);
+  }, [data, filter, followingCards]);
 
   if (isLoading)
     return (

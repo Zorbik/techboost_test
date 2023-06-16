@@ -42,32 +42,77 @@ export const TweetCard = ({ tweet }) => {
         position={"relative"}
         borderRadius={"md"}
         shadow={"cardShadow"}
+        _before={{
+          content: '""',
+          position: "absolute",
+          top: "214px",
+          w: "380px",
+          h: "8px",
+          bg: "textColor",
+          shadow: "lineShadow",
+        }}
       >
-        <Box position={"absolute"} left={"20px"} top={"20px"}>
-          <Image src="/assets/logo.svg" alt="logo" />
-        </Box>
-        <Box position={"absolute"} left={"36px"} top={"28px"}>
-          <Image src="/assets/picture.svg" alt="background" />
-        </Box>
         <Box
           position={"absolute"}
-          top={"214px"}
-          w={"380px"}
-          h={"8px"}
-          bg={"textColor"}
-          shadow={"lineShadow"}
+          left={"20px"}
+          top={"20px"}
+          bg={'url("/assets/logo.svg")'}
+          w={"76px"}
+          h={"22px"}
         ></Box>
         <Box
           position={"absolute"}
-          left={"150px"}
-          top={"178px"}
+          left={"36px"}
+          top={"28px"}
+          bg={'url("/assets/picture.svg")'}
+          w={"308px"}
+          h={"168px"}
+        ></Box>
+        <Box
+          position={"absolute"}
+          display={"flex"}
+          justifyContent={"center"}
+          alignItems={"center"}
+          left={"151px"}
+          top={"179px"}
           borderRadius={"full"}
-          borderWidth={"8px"}
           overflow={"hidden"}
           w={"80px"}
           h={"80px"}
         >
-          <Image src={avatar} alt={user} />
+          <Box
+            position="absolute"
+            top="-9px"
+            left="-9px"
+            width="100%"
+            height="100%"
+            borderRadius="50%"
+            backgroundColor="textColor"
+            boxShadow="avatarShadow"
+          >
+            <Box
+              position="absolute"
+              display={"flex"}
+              justifyContent={"center"}
+              alignItems={"center"}
+              top="9px"
+              left="9px"
+              width="100%"
+              height="100%"
+              borderRadius="50%"
+              backgroundColor="textColor"
+              boxShadow="avatarShadow"
+            >
+              <Image
+                src={avatar}
+                alt={user}
+                w={"62px"}
+                h={"62px"}
+                bgSize="cover"
+                borderRadius={"full"}
+              />
+            </Box>
+          </Box>
         </Box>
         <Text variant={"textCard"} mt={"284px"}>
           {formatedTweets} TWEETS
